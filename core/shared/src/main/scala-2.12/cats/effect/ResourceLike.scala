@@ -29,7 +29,7 @@ abstract private[effect] class ResourceLike[+F[_], +A] {
    * @param f the function to apply to the allocated resource
    * @return the result of applying [F] to
    */
-  def use[G[x] >: F[x], B](f: A => G[B])(implicit F: BracketThrow[G[*]]): G[B] =
+  def use[G[x] >: F[x], B, E](f: A => G[B])(implicit F: Bracket[G[*], E]): G[B] =
     use_(f)
 
   /**
